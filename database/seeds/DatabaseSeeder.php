@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
-        DB::statement('SET FOREING_KEY_CHECKS = 0');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         User::truncate();
         Category::truncate();
         Product::truncate();
@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
         factory(Product::class, $cantidadProductos)->create()->each(
         	function($producto){
         		//pluck es un metodo de laravel para solo obtener el id
-	        	$categorias = Category::all()->random(mt_rand(1,5))->pluck('id');
+	        	$categories = Category::all()->random(mt_rand(1,5))->pluck('id');
 
 	        	//attach es para relacionar de muchos a muchos
 	        	$producto->categories()->attach($categories);

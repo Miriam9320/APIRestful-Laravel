@@ -20,25 +20,25 @@ use Illuminate\Http\Request;
  * primer parametro es el recurso, segundo ruta y controlador, tercero se restringe a que la ruta solo sea para index y show
  * Buyers
  */
-Route::resource('buyers','Buyer\BuyerController',['only' => ['index', 'show']]);
+Route::resource('buyers', 'Buyer\BuyerController', ['only' => ['index', 'show']]);
  /**
  * All operations except create and edit
  * Categories
  */
-Route::resource('category','Category\CategoryController',['except' => ['create', 'edit']]);
+Route::resource('category', 'Category\CategoryController', ['except' => ['create', 'edit']]);
  /*
  * Products
  */
-Route::resource('products','Product\ProductController',['only' => ['index', 'show']]);
+Route::resource('products', 'Product\ProductController', ['only' => ['index', 'show']]);
  /*
  * Transactions
  */
-Route::resource('transactions','Transaction\TransactionController',['only' => ['index', 'show']]);
+Route::resource('transactions', 'Transaction\TransactionController', ['only' => ['index', 'show']]);
  /*
  * Sellers
  */
-Route::resource('sellers','Seller\SellerController',['only' => ['index', 'show']]);
+Route::resource('sellers', 'Seller\SellerController', ['only' => ['index', 'show']]);
  /*
  * Users
  */
-Route::resource('users','User\UserController',['except' => ['create', 'edit']]);
+Route::resource('users', 'User\UserController', ['except' => ['create', 'edit']]);
