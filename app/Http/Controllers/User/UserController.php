@@ -17,7 +17,9 @@ class UserController extends Controller
     {
         $usuarios = User::all();
 
-        return $usuarios;
+        return response()->json(['data' => $usuarios], 200);
+
+        //return $usuarios;
     }
 
 
@@ -29,7 +31,28 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $campos = $request->all();
+
+        //validar que nos envien datos correctos
+        $rules = [
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6|confirmed',
+        ];
+        //ejecutar las reglas validando la peticion
+        //se realiza con validate, enviando la peticion original y las reglas a usar
+        $this->validate($request, $rules);
+
+        //revisar modificaciones en los campos
+        $campos['password'] = bcrypt($request->password);
+        $campos['verified'] = User::USUARIO_NO_VERIFICADO;
+        $campos['verification_token'] = User::generarVerificationToken();
+        $campos['admin'] = User::USUARIO_REGULAR;
+        
+
+        //CReate es una asignacion masiva por medio de un array
+        $usuario = User::create($campos);
+        return response()->json(['data' => $usuario], 201);
     }
 
     /**
@@ -40,7 +63,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $usuario = User::findOrFail($id);
+
+        return response()->json(['data' => $usuario], 200);
     }
 
     /**
